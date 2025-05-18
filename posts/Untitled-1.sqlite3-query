@@ -1,0 +1,5 @@
+-- database: /home/user/Desktop/Django52-2/db.sqlite3
+
+-- Чтобы выполнить весь файл, нажмите кнопку ▷ в правом верхнем углу окна.
+
+SELECT * FROM auth_group;
