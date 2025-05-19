@@ -9,28 +9,23 @@ def index(request):
 def homepage_view(request):
     return render(request, "base.html")
 
-
-# Create your views here.
-
-
 def post_list_view(request):
     if request.method == 'GET':
         posts = Post.objects.all()
-        return render(request, "posts/post_list.html", context={'posts':posts})
-
+        return render(request, "posts/post_list.html", context={'posts': posts})
 
 def post_detail_view(request, post_id):
     if request.method == 'GET':
         post = Post.objects.filter(id=post_id).first()
-        return render(request, 'posts/post_detail.html', context= {'post': post})
-    
+        return render(request, 'posts/post_detail.html', context={'post': post})
+
 def post_create_view(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = Post.objects.create(**form.cleaned_data)
+            form.save()  # Теперь используется ModelForm
             return redirect('/posts/')
-    else:  # GET
+    else:
         form = PostForm()
-    
+
     return render(request, "posts/post_create.html", context={'form': form})
